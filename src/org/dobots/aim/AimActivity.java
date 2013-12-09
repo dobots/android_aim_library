@@ -7,6 +7,12 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 
+/**
+ * Base class for an AIM UI module (activity).
+ * 
+ * @author dominik
+ *
+ */
 public abstract class AimActivity extends Activity implements IAimModule {
 
 	// TODO: adjustable id, multiple modules
@@ -25,9 +31,9 @@ public abstract class AimActivity extends Activity implements IAimModule {
 	}
 	
 	@Override
-	public void onCreate(final Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
 		Intent intent = getIntent();
 		mModuleId = intent.getIntExtra("id", -1);
 		
@@ -35,6 +41,17 @@ public abstract class AimActivity extends Activity implements IAimModule {
 		mAimConnectionHelper.bindToMsgService();
 		
 		Log.i(getTag(),"onCreate");
+	}
+	
+	@Override
+	public void onAimStop() {
+		runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				finish();
+			}
+		});
 	}
 	
 	@Override
@@ -62,22 +79,26 @@ public abstract class AimActivity extends Activity implements IAimModule {
 	}
 
 	@Override
-	protected void onDestroy() {
+	public void onDestroy() {
 		super.onDestroy();		
 		mAimConnectionHelper.destroy();
 		Log.i(getTag(), "onDestroy ");
 	}
 	
-	protected Messenger getOutMessenger(String port) {
+	public Messenger getOutMessenger(String port) {
 		return mAimConnectionHelper.getOutMessenger(port);
 	}
 
-	protected Messenger getInMessenger(String port) {
+	public Messenger getInMessenger(String port) {
 		return mAimConnectionHelper.getInMessenger(port);
 	}
 
-	protected void msgSend(Messenger messenger, Message msg) {
+	public void msgSend(Messenger messenger, Message msg) {
 		mAimConnectionHelper.msgSend(messenger, msg);
+	}
+	
+	public void sendData(Messenger messenger, String data) {
+		mAimConnectionHelper.sendData(messenger, data);
 	}
 
 }

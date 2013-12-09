@@ -6,6 +6,14 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Messenger;
 
+/**
+ * Interface defining an AIM module, which can be a service (background module)
+ * or an activity (UI module). 
+ * 
+ * 
+ * @author dominik
+ *
+ */
 public interface IAimModule {
 
 	String getModuleName();
@@ -42,4 +50,6 @@ public interface IAimModule {
 	
 	//
 	void unbindService (ServiceConnection conn);
+
+	String getPackageName();
 }

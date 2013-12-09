@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:padding="16dp"
+	android:clickable="true"
+	android:focusable="true"
+	android:focusableInTouchMode="true"  >
+	
+    <requestFocus />
+
+	<TextView
+	    android:id="@+id/txtModuleStatus"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:text="@string/module_status"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	<ToggleButton
+	    android:id="@+id/btnStartStop"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/txtModuleStatus"
+	    android:layout_below="@+id/txtModuleStatus"
+	    android:layout_marginLeft="32dp"
+	    android:layout_marginTop="32dp"
+	    android:textOff="@string/start"
+	    android:textOn="@string/stop" />
+	
+	<ImageView
+		android:id="@+id/imgIcon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignTop="@+id/txtModuleStatus"
+		android:layout_alignParentRight="true"
+		android:layout_marginRight="16dp"
+		android:src="@drawable/ic_launcher" />
+		<!-- replace android:src with launcher icon of app -->
+		
+	<TextView
+	    android:id="@+id/txtDescription"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/txtModuleStatus"
+	    android:layout_below="@+id/btnStartStop"
+	    android:layout_marginTop="32dp"
+	    android:text="@string/module_description" />
+
+</RelativeLayout>
+

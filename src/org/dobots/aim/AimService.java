@@ -6,6 +6,12 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 
+/**
+ * Base class for an AIM background module (service).
+ * 
+ * @author dominik
+ *
+ */
 public abstract class AimService extends Service implements IAimModule {
 
 	// TODO: adjustable id, multiple modules
@@ -83,5 +89,8 @@ public abstract class AimService extends Service implements IAimModule {
 	protected void msgSend(Messenger messenger, Message msg) {
 		mAimConnectionHelper.msgSend(messenger, msg);
 	}
-	
+
+	protected void dataSend(Messenger messenger, String data) {
+		mAimConnectionHelper.sendData(messenger, data);
+	}
 }

@@ -2,10 +2,17 @@ package org.dobots.aim;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.os.Messenger;
-
 
 public final class AimProtocol {
+	
+	public static class AimDataTypeException extends Exception {
+		private static final long serialVersionUID = 413707615478342191L;
+	};
+	
+	public static class AimArrayDimensionException extends Exception {
+		private static final long serialVersionUID = -8438351775013985455L;
+	}
+	
 	public static final int MSG_REGISTER = 1;
 	public static final int MSG_UNREGISTER = 2;
 	public static final int MSG_SET_MESSENGER = 3;
@@ -71,18 +78,4 @@ public final class AimProtocol {
 		return res;
 	}
 	
-	public static String getStringData(Message msg) {
-		Bundle bundle = msg.getData();
-		if (bundle.getInt("datatype") == DATATYPE_STRING) {
-			return bundle.getString("data");
-		}
-		return "";
-	}
-	
-	public static void setData(Message msg, String data) {
-		Bundle bundle = new Bundle();
-		bundle.putInt("datatype", AimProtocol.DATATYPE_STRING);
-		bundle.putString("data", data);
-		msg.setData(bundle);
-	}
 }

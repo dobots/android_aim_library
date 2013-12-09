@@ -15,6 +15,14 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
+/**
+ * The AIM connection helper provides the communication interface with the
+ * dodedodo app. It connects (binds) to the MsgService, registers messengers 
+ * for the outgoing ports and receives messengers from incoming ports.
+ * 
+ * @author dominik
+ *
+ */
 public class AimConnectionHelper {
 
 	private IAimModule mModule;
@@ -36,6 +44,7 @@ public class AimConnectionHelper {
 			Message msg = Message.obtain(null, AimProtocol.MSG_REGISTER);
 			Bundle bundle = new Bundle();
 			bundle.putString("module", mModule.getModuleName());
+			bundle.putString("package", mModule.getPackageName());
 			bundle.putInt("id", mModule.getModuleId()); // TODO: adjustable id, multiple modules
 			msg.setData(bundle);
 			msgSend(msg);
@@ -165,7 +174,7 @@ public class AimConnectionHelper {
 
 	public void sendData(Messenger messenger, String data) {
 		Message msgOut = Message.obtain(null, AimProtocol.MSG_PORT_DATA);
-		AimProtocol.setData(msgOut, data);
+		AimUtils.setData(msgOut, data);
 		msgSend(messenger, msgOut);
 	}
 
