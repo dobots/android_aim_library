@@ -54,6 +54,7 @@ public class AimConnectionHelper {
 				msgPort.replyTo = entry.getValue();
 				Bundle bundlePort = new Bundle();
 				bundlePort.putString("module", mModule.getModuleName());
+				bundlePort.putString("package", mModule.getPackageName());
 				bundlePort.putInt("id", mModule.getModuleId()); 
 				bundlePort.putString("port", entry.getKey());
 				msgPort.setData(bundlePort);
@@ -61,13 +62,13 @@ public class AimConnectionHelper {
 			}
 
 
-			Log.i(mModule.getTag(), "Connected to MsgService: " + mToMsgService.toString());
+			Log.i(mModule.getModuleName(), "Connected to MsgService: " + mToMsgService.toString());
 		}
 		
 		public void onServiceDisconnected(ComponentName className) {
 			// This is called when the connection with the service has been unexpectedly disconnected: its process crashed.
 			mToMsgService = null;
-			Log.i(mModule.getTag(), "Disconnected from MsgService");
+			Log.i(mModule.getModuleName(), "Disconnected from MsgService");
 		}
 	};
 
@@ -77,14 +78,14 @@ public class AimConnectionHelper {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case AimProtocol.MSG_SET_MESSENGER:
-				Log.i(mModule.getTag(), "set messenger");
+				Log.i(mModule.getModuleName(), "set messenger");
 				String port = msg.getData().getString("port");
 				if (mOutMessenger.containsKey(port)) {
 					mOutMessenger.put(port, msg.replyTo);
 				}
 				break;
 			case AimProtocol.MSG_STOP:
-				Log.i(mModule.getTag(), "stopping");
+				Log.i(mModule.getModuleName(), "stopping");
 				mModule.onAimStop();
 				break;
 			default:
@@ -112,7 +113,7 @@ public class AimConnectionHelper {
 			intent.setClassName("org.dobots.dodedodo", "org.dobots.dodedodo.MsgService");
 			mModule.bindService(intent, mMsgServiceConnection, Context.BIND_AUTO_CREATE);
 			mMsgServiceIsBound = true;
-			Log.i(mModule.getTag(), "Binding to msgService");
+			Log.i(mModule.getModuleName(), "Binding to msgService");
 		}
 	}
 
@@ -123,6 +124,7 @@ public class AimConnectionHelper {
 				Message msg = Message.obtain(null, AimProtocol.MSG_UNREGISTER);
 				Bundle bundle = new Bundle();
 				bundle.putString("module", mModule.getModuleName());
+				bundle.putString("package", mModule.getPackageName());
 				bundle.putInt("id", mModule.getModuleId());
 				msg.setData(bundle);
 				msgSend(msg);
@@ -130,21 +132,21 @@ public class AimConnectionHelper {
 			// Detach our existing connection.
 			mModule.unbindService(mMsgServiceConnection);
 			mMsgServiceIsBound = false;
-			Log.i(mModule.getTag(), "Unbinding from msgService");
+			Log.i(mModule.getModuleName(), "Unbinding from msgService");
 		}
 	}
 
 	// Send a msg to the msgService
 	public void msgSend(Message msg) {
 		if (!mMsgServiceIsBound) {
-			Log.i(mModule.getTag(), "Can't send message to service: not bound");
+			Log.i(mModule.getModuleName(), "Can't send message to service: not bound");
 			return;
 		}
 		try {
 			msg.replyTo = mFromMsgService;
 			mToMsgService.send(msg);
 		} catch (RemoteException e) {
-			Log.i(mModule.getTag(), "Failed to send msg to service. " + e);
+			Log.e(mModule.getModuleName(), "Failed to send msg to service. " + e);
 			// There is nothing special we need to do if the service has crashed.
 		}
 	}
@@ -157,7 +159,7 @@ public class AimConnectionHelper {
 			//msg.replyTo = mFromMsgService;
 			messenger.send(msg);
 		} catch (RemoteException e) {
-			Log.i(mModule.getTag(), "failed to send msg to service. " + e);
+			Log.e(mModule.getModuleName(), "failed to send msg to service. " + e);
 			// There is nothing special we need to do if the service has crashed.
 		}
 	}
@@ -171,11 +173,56 @@ public class AimConnectionHelper {
 		// TODO Auto-generated method stub
 		return mInMessenger.get(port);
 	}
-
-	public void sendData(Messenger messenger, String data) {
+	
+	public void sendData(Messenger messenger, Bundle data) {
 		Message msgOut = Message.obtain(null, AimProtocol.MSG_PORT_DATA);
-		AimUtils.setData(msgOut, data);
+		msgOut.setData(data);
 		msgSend(messenger, msgOut);
 	}
 
+	public void sendData(Messenger messenger, String data) {
+		Bundle bundle = AimUtils.encode(data);
+		sendData(messenger, bundle);
+	}
+
+	public void sendData(Messenger messenger, int value) {
+		Bundle bundle = AimUtils.encode(value);
+		sendData(messenger, bundle);
+	}
+
+	public void sendData(Messenger messenger, float value) {
+		Bundle bundle = AimUtils.encode(value);
+		sendData(messenger, bundle);
+	}
+
+	public void sendData(Messenger messenger, int[] value) {
+		Bundle bundle = AimUtils.encode(value);
+		sendData(messenger, bundle);
+	}
+
+	public void sendData(Messenger messenger, int[][] value) {
+		Bundle bundle = AimUtils.encode(value);
+		sendData(messenger, bundle);
+	}
+
+	public void sendData(Messenger messenger, int[][][] value) {
+		Bundle bundle = AimUtils.encode(value);
+		sendData(messenger, bundle);
+	}
+
+	public void sendData(Messenger messenger, float[] value) {
+		Bundle bundle = AimUtils.encode(value);
+		sendData(messenger, bundle);
+	}
+
+	public void sendData(Messenger messenger, float[][] value) {
+		Bundle bundle = AimUtils.encode(value);
+		sendData(messenger, bundle);
+	}
+
+	public void sendData(Messenger messenger, float[][][] value) {
+		Bundle bundle = AimUtils.encode(value);
+		sendData(messenger, bundle);
+	}
+	
 }

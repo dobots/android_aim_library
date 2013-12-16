@@ -93,12 +93,48 @@ public abstract class AimActivity extends Activity implements IAimModule {
 		return mAimConnectionHelper.getInMessenger(port);
 	}
 
-	public void msgSend(Messenger messenger, Message msg) {
-		mAimConnectionHelper.msgSend(messenger, msg);
-	}
+//	public void msgSend(Messenger messenger, Message msg) {
+//		mAimConnectionHelper.msgSend(messenger, msg);
+//	}
 	
-	public void sendData(Messenger messenger, String data) {
+	public void sendData(Messenger messenger, Bundle data) {
 		mAimConnectionHelper.sendData(messenger, data);
+	}
+
+	public void sendData(Messenger messenger, String value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, int value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, float value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, int[] value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, int[][] value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, int[][][] value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, float[] value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, float[][] value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, float[][][] value) {
+		mAimConnectionHelper.sendData(messenger, value);
 	}
 
 }

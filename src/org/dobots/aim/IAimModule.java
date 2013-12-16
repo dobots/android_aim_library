@@ -20,8 +20,8 @@ public interface IAimModule {
 	
 	int getModuleId();
 
-	String getTag();
-	
+	String getPackageName();
+
 	/*
 	 * TO BE DEFINED IN THE SUB-CLASSES
 	 * 
@@ -50,6 +50,4 @@ public interface IAimModule {
 	
 	//
 	void unbindService (ServiceConnection conn);
-
-	String getPackageName();
 }

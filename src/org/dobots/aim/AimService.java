@@ -2,6 +2,7 @@ package org.dobots.aim;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
@@ -86,11 +87,48 @@ public abstract class AimService extends Service implements IAimModule {
 		return mAimConnectionHelper.getInMessenger(port);
 	}
 
-	protected void msgSend(Messenger messenger, Message msg) {
-		mAimConnectionHelper.msgSend(messenger, msg);
-	}
-
-	protected void dataSend(Messenger messenger, String data) {
+//	protected void msgSend(Messenger messenger, Message msg) {
+//		mAimConnectionHelper.msgSend(messenger, msg);
+//	}
+	
+	public void sendData(Messenger messenger, Bundle data) {
 		mAimConnectionHelper.sendData(messenger, data);
 	}
+
+	public void sendData(Messenger messenger, String value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, int value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, float value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, int[] value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, int[][] value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, int[][][] value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, float[] value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, float[][] value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+
+	public void sendData(Messenger messenger, float[][][] value) {
+		mAimConnectionHelper.sendData(messenger, value);
+	}
+	
 }
