@@ -2,7 +2,6 @@ package org.dobots.aim;
 
 import org.dobots.aim.AimProtocol.AimArrayDimensionException;
 import org.dobots.aim.AimProtocol.AimDataTypeException;
-import org.dobots.utilities.log.Loggable;
 
 import android.os.Bundle;
 import android.os.Message;

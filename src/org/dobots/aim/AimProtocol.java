@@ -29,6 +29,12 @@ public final class AimProtocol {
 	public static final int MSG_GET_MESSENGER = 14;
 	public static final int MSG_NOT_INSTALLED = 15;
 	public static final int MSG_XMPP_MSG = 16;
+	public static final int MSG_STATUS_NUM_MODULES = 17;
+	public static final int MSG_STATUS_STARTED_MODULE = 18;
+	public static final int MSG_STATUS_STOPPED_MODULE = 19;
+	public static final int MSG_PING = 20;
+	public static final int MSG_PONG = 21;
+	public static final int MSG_UNSET_MESSENGER = 22;
 	
 	public static final int DATATYPE_FLOAT = 1;
 	public static final int DATATYPE_FLOAT_ARRAY = 2;
@@ -50,10 +56,10 @@ public final class AimProtocol {
 			res = DATATYPE_INT_ARRAY;
 		else if (s.equals("string"))
 			res = DATATYPE_STRING;
-		else if (s.equals("image"))
-			res = DATATYPE_IMAGE;
-		else if (s.equals("binary"))
-			res = DATATYPE_BINARY;
+//		else if (s.equals("image"))
+//			res = DATATYPE_IMAGE;
+//		else if (s.equals("binary"))
+//			res = DATATYPE_BINARY;
 		return res;
 	}
 	
@@ -70,10 +76,10 @@ public final class AimProtocol {
 			res = new String("intarray"); break;
 		case DATATYPE_STRING:
 			res = new String("string"); break;
-		case DATATYPE_IMAGE:
-			res = new String("image"); break;
-		case DATATYPE_BINARY:
-			res = new String("binary"); break;
+//		case DATATYPE_IMAGE:
+//			res = new String("image"); break;
+//		case DATATYPE_BINARY:
+//			res = new String("binary"); break;
 		}
 		return res;
 	}

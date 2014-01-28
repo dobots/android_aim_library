@@ -2,6 +2,8 @@ package org.dobots.aim;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -30,6 +32,9 @@ public class AimConnectionHelper {
 	protected Messenger mToMsgService = null;
 	protected final Messenger mFromMsgService = new Messenger(new IncomingMsgHandler());
 	protected boolean mMsgServiceIsBound;
+	
+	Timer mHeartBeatTimer;
+	HeartBeatTimerTask mHeartBeatTimerTask;
 	
 	// key is the name of the port, value is the messenger assigned to that port
 	protected HashMap<String, Messenger> mInMessenger = new HashMap<String, Messenger>();
@@ -94,14 +99,34 @@ public class AimConnectionHelper {
 		}
 	}
 	
+	private class HeartBeatTimerTask extends TimerTask {
+		@Override
+		public void run() {
+			if (mToMsgService != null) {
+				Message msg = Message.obtain(null, AimProtocol.MSG_PONG);
+				Bundle b = new Bundle();
+				b.putString("package", mModule.getPackageName());
+				b.putString("module", mModule.getModuleName());
+				b.putInt("id", mModule.getModuleId());
+				msg.setData(b);
+				msgSend(msg);
+			}
+		}
+	}
+	
 	public AimConnectionHelper(IAimModule module) {
 		mModule = module;
 		
 		mModule.defineInMessenger(mInMessenger);
 		mModule.defineOutMessenger(mOutMessenger);
+		
+		mHeartBeatTimer = new Timer();
+		mHeartBeatTimerTask = new HeartBeatTimerTask();
+		mHeartBeatTimer.schedule(mHeartBeatTimerTask ,0, 1000);
 	}
 	
 	public void destroy() {
+		mHeartBeatTimer.cancel();
 		unbindFromMsgService();
 	}
 	
