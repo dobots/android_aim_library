@@ -220,34 +220,4 @@ public class AimConnectionHelper {
 		sendData(messenger, bundle);
 	}
 
-	public void sendData(Messenger messenger, int[] value) {
-		Bundle bundle = AimUtils.encode(value);
-		sendData(messenger, bundle);
-	}
-
-	public void sendData(Messenger messenger, int[][] value) {
-		Bundle bundle = AimUtils.encode(value);
-		sendData(messenger, bundle);
-	}
-
-	public void sendData(Messenger messenger, int[][][] value) {
-		Bundle bundle = AimUtils.encode(value);
-		sendData(messenger, bundle);
-	}
-
-	public void sendData(Messenger messenger, float[] value) {
-		Bundle bundle = AimUtils.encode(value);
-		sendData(messenger, bundle);
-	}
-
-	public void sendData(Messenger messenger, float[][] value) {
-		Bundle bundle = AimUtils.encode(value);
-		sendData(messenger, bundle);
-	}
-
-	public void sendData(Messenger messenger, float[][][] value) {
-		Bundle bundle = AimUtils.encode(value);
-		sendData(messenger, bundle);
-	}
-	
 }
