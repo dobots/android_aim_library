@@ -107,28 +107,4 @@ public abstract class AimService extends Service implements IAimModule {
 		mAimConnectionHelper.sendData(messenger, value);
 	}
 
-	public void sendData(Messenger messenger, int[] value) {
-		mAimConnectionHelper.sendData(messenger, value);
-	}
-
-	public void sendData(Messenger messenger, int[][] value) {
-		mAimConnectionHelper.sendData(messenger, value);
-	}
-
-	public void sendData(Messenger messenger, int[][][] value) {
-		mAimConnectionHelper.sendData(messenger, value);
-	}
-
-	public void sendData(Messenger messenger, float[] value) {
-		mAimConnectionHelper.sendData(messenger, value);
-	}
-
-	public void sendData(Messenger messenger, float[][] value) {
-		mAimConnectionHelper.sendData(messenger, value);
-	}
-
-	public void sendData(Messenger messenger, float[][][] value) {
-		mAimConnectionHelper.sendData(messenger, value);
-	}
-	
 }
