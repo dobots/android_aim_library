@@ -32,3 +32,12 @@ The AimProtocol.java defines the protocol of the messages sent between MsgServic
 AimUtils.java provides functions to encode/extract data in/from a Bundle. 
 
 SimpleAimServiceUI.java provides a simple UI for background modules. The module status is shown (running/stopped) and a button is provided to start/stop the module.
+
+## Copyrights
+
+The copyrights (2014) belong to:
+
+- License: LGPL v.3
+- Author: Dominik Egger
+- Almende B.V., http://www.almende.com and DoBots B.V., http://www.dobots.nl
+- Rotterdam, The Netherlands
